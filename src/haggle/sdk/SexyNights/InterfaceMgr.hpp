@@ -18,7 +18,6 @@ namespace SexyNights
 		//Overload that uses this
 		static SexyNights::InterfaceMgr* AddTopBalls(int count);
 		static SexyNights::InterfaceMgr* AddTopBalls(SexyNights::InterfaceMgr* input, int count);
-		static SexyNights::InterfaceMgr* SetNumBalls(int count);
-		static SexyNights::InterfaceMgr* SetNumBalls(SexyNights::InterfaceMgr* input, int count);
+		static void SetNumBalls(int count);
 	};
 };

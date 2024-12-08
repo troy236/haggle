@@ -37,21 +37,24 @@ void init()
 
 			case Haggle::PeggleVersion::NightsDeluxe10:
 			{
+				SexyNights::callbacks::init();
+
 				SexyNights::ThunderballApp::setup();
 				SexyNights::Board::setup();
 				SexyNights::LogicMgr::setup();
-				SexyNights::Ball::setup();
+				//SexyNights::Ball::setup();
 				SexyNights::PhysObj::setup();
 				SexyNights::SoundMgr::setup();
-				SexyNights::CharacterMgr::setup();
 				SexyNights::EffectMgr::setup();
-				SexyNights::CollisionMgr::setup();
 				SexyNights::InterfaceMgr::setup();
+
+				/*SexyNights::CharacterMgr::setup();
+				SexyNights::CollisionMgr::setup();
 				SexyNights::PlayerInfo::setup();
 				SexyNights::LevelScreen::setup();
 				SexyNights::StageMgr::setup();
 				SexyNights::MainMenu::setup();
-				SexyNights::Graphics::setup();
+				SexyNights::Graphics::setup();*/
 			} break;
 		}
 

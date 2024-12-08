@@ -102,6 +102,12 @@ bool Sexy::LogicMgr::check_exists()
 	return false;
 }
 
+int Sexy::LogicMgr::GetBallCount()
+{
+	if (!check_exists()) return -1;
+	return *(int*)(Sexy::LogicMgr::logic_mgr + 0x17c + *(int*)(Sexy::LogicMgr::logic_mgr + 0x128) * 4);
+}
+
 Sexy::LogicMgr* Sexy::LogicMgr::IncNumBalls(int top_count, int bottom_count, bool bottom)
 {
 	if (!check_exists()) return 0;

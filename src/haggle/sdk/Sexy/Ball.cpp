@@ -26,7 +26,6 @@ void Sexy::Ball::SetPos(float x_pos, float y_pos)
 	reinterpret_cast<void(__thiscall*)(Sexy::Ball*, float, float)>(0x00474E60)(Sexy::Ball::ball, x_pos, y_pos);
 }
 
-
 void Sexy::Ball::SetVelocity(float x_velo, float y_velo)
 {
 	if (!Sexy::Ball::check_exists()) return;

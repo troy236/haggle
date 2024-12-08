@@ -2,16 +2,16 @@
 
 SexyNights::SoundMgr* SexyNights::SoundMgr::sound_mgr;
 
-static char* (__fastcall* SexyNights__SoundMgr__SoundMgr_)(SexyNights::SoundMgr*, char*);
-char* __fastcall SexyNights__SoundMgr__SoundMgr(SexyNights::SoundMgr* this_, char* edx)
+static char* (__stdcall* SexyNights__SoundMgr__SoundMgr_)(SexyNights::SoundMgr*);
+char* __stdcall SexyNights__SoundMgr__SoundMgr(SexyNights::SoundMgr* this_)
 {
 	SexyNights::SoundMgr::sound_mgr = this_;
-	return SexyNights__SoundMgr__SoundMgr_(this_, edx);
+	return SexyNights__SoundMgr__SoundMgr_(this_);
 }
 
 void SexyNights::SoundMgr::setup()
 {
-
+	MH_CreateHook((void*)0x00478720, SexyNights__SoundMgr__SoundMgr, (void**)&SexyNights__SoundMgr__SoundMgr_);
 }
 
 bool SexyNights::SoundMgr::check_exists()
@@ -20,9 +20,22 @@ bool SexyNights::SoundMgr::check_exists()
 	return true;
 }
 
-void SexyNights::SoundMgr::AddSound(int a2, float a3, int a4, int a5, int a6, float a7)
+void SexyNights::SoundMgr::AddSound(int param1)
 {
 	if (!SexyNights::SoundMgr::check_exists()) return;
-	reinterpret_cast<void(__thiscall*)(SexyNights::SoundMgr*, int, float, int, int, int, float)>
-		(0x00478A50)(SexyNights::SoundMgr::sound_mgr, a2, a3, a4, a5, a6, a7);
+
+	static constexpr auto param2 = 0x0;
+	static constexpr auto param3 = 0xbf800000;
+	static constexpr auto add_sound_func = 0x00478A50;
+	__asm
+	{
+		pushad;
+		mov edi, SexyNights::SoundMgr::sound_mgr;
+		xor eax, eax;
+		push param3;
+		push param2;
+		push param1;
+		call add_sound_func; //Callee cleans the stack
+		popad;
+	}
 }

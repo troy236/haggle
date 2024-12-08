@@ -26,6 +26,7 @@ namespace SexyNights
 		TimeBomb,
 		FireBall,
 		LuckySpin,
+		ElectroBolt,
 	};
 
 	class __declspec(dllexport) LogicMgr
@@ -49,7 +50,8 @@ namespace SexyNights
 		static LogicMgr* logic_mgr;
 		static void setup();
 
-		static SexyNights::LogicMgr* IncNumBalls(int top_count, int bottom_count, bool bottom);
+		static int GetBallCount();
+		static SexyNights::LogicMgr* IncNumBalls(int top_count, bool bottom);
 		static int BeginShot(bool doGetReplayPoint);
 		static void MouseDown(int xPos, int yPos, int mouseButtonId, bool b1, bool b2);
 		static void DoPowerup(SexyNights::Ball* ball, SexyNights::PhysObj* phys_obj, int powerup, int a5);
@@ -89,7 +91,7 @@ namespace SexyNights
 		 */
 		static float DegreesToRadians(float angleDegrees);
 		static float RadiansToDegrees(float angleRadians);
-		static SexyNights::FloatingText* AddStandardText(std::string& string, float pos_x, float pos_y, int type);
+		static SexyNights::FloatingText* AddStandardText(std::string& string, float pos_x, float pos_y, int font_type);
 		static void CalcCornerDisplay();
 
 	private:

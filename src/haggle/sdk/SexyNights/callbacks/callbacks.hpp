@@ -50,9 +50,9 @@ namespace SexyNights
 
 		static void on_peg_hit(callback_<void __cdecl(SexyNights::Ball*, SexyNights::PhysObj*, bool)> callback);
 		static void after_peg_hit(callback_<void __cdecl(SexyNights::Ball*, SexyNights::PhysObj*, bool)> callback);
-		static void on_begin_shot(callback_<void __cdecl(SexyNights::LogicMgr*, bool)> callback);
-		static void after_begin_shot(callback_<void __cdecl(SexyNights::LogicMgr*, bool)> callback);
-		static void after_begin_turn_2(callback_<void __cdecl(SexyNights::LogicMgr*)> callback);
+		static void on_begin_shot(callback_<void __cdecl()> callback);
+		static void after_begin_shot(callback_<void __cdecl()> callback);
+		static void after_begin_turn_2(callback_<void __cdecl()> callback);
 		static void after_main_menu_update(callback_<void __cdecl(SexyNights::MainMenu*)> callback);
 		static void on_load_level(callback_<void __cdecl(SexyNights::Board*, std::string&)> callback);
 		static void on_do_play(callback_<void __cdecl(SexyNights::LevelScreen*, unsigned int)> callback);
@@ -64,9 +64,9 @@ namespace SexyNights
 		static void run_basic_callbacks(callbacks::type type);
 		static void run_peg_hit_callbacks(SexyNights::Ball* ball, SexyNights::PhysObj* phys_obj, bool a4);
 		static void run_after_peg_hit_callbacks(SexyNights::Ball* ball, SexyNights::PhysObj* phys_obj, bool a4);
-		static void run_begin_shot_callbacks(SexyNights::LogicMgr* logic_mgr, bool doGetReplayPoint);
-		static void run_after_begin_shot_callbacks(SexyNights::LogicMgr* logic_mgr, bool doGetReplayPoint);
-		static void run_after_begin_turn_2_callbacks(SexyNights::LogicMgr* logic_mgr);
+		static void run_begin_shot_callbacks();
+		static void run_after_begin_shot_callbacks();
+		static void run_after_begin_turn_2_callbacks();
 		static void run_after_main_menu_update_callbacks(SexyNights::MainMenu* main_menu);
 		static void run_load_level_callbacks(SexyNights::Board* board, std::string& level_name);
 		static void run_do_play_callbacks(SexyNights::LevelScreen* level_screen, unsigned int a3);
@@ -80,8 +80,8 @@ namespace SexyNights
 
 		static std::unordered_map<callbacks::type, std::vector<callback_<void __cdecl()>>> basic_callbacks_;
 		static std::unordered_map<callbacks::type, std::vector<callback_<void __cdecl(SexyNights::Ball*, SexyNights::PhysObj*, bool)>>> peg_hit_callbacks_;
-		static std::unordered_map<callbacks::type, std::vector<callback_<void __cdecl(SexyNights::LogicMgr*, bool)>>> begin_shot_callbacks_;
-		static std::unordered_map<callbacks::type, std::vector<callback_<void __cdecl(SexyNights::LogicMgr*)>>> begin_turn_2_callbacks_;
+		static std::unordered_map<callbacks::type, std::vector<callback_<void __cdecl()>>> begin_shot_callbacks_;
+		static std::unordered_map<callbacks::type, std::vector<callback_<void __cdecl()>>> begin_turn_2_callbacks_;
 		static std::unordered_map<callbacks::type, std::vector<callback_<void __cdecl(SexyNights::MainMenu*)>>> main_menu_update_callbacks_;
 		static std::unordered_map<callbacks::type, std::vector<callback_<void __cdecl(SexyNights::Board*, std::string&)>>> load_level_callbacks_;
 		static std::unordered_map<callbacks::type, std::vector<callback_<void __cdecl(SexyNights::LevelScreen*, unsigned int)>>> do_play_callbacks_;

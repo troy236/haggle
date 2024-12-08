@@ -49,6 +49,7 @@ namespace Sexy
 		static LogicMgr* logic_mgr;
 		static void setup();
 
+		static int GetBallCount();
 		static Sexy::LogicMgr* IncNumBalls(int top_count, int bottom_count, bool bottom);
 		static int BeginShot(bool doGetReplayPoint);
 		static void MouseDown(int xPos, int yPos, int mouseButtonId, bool b1, bool b2);

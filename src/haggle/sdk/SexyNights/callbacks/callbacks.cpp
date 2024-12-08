@@ -7,8 +7,8 @@ namespace SexyNights
 	std::vector<callback_<void __cdecl()>> callbacks::once_callbacks_;
 	std::unordered_map<callbacks::type, std::vector<callback_<void __cdecl()>>> callbacks::basic_callbacks_;
 	std::unordered_map<callbacks::type, std::vector<callback_<void __cdecl(SexyNights::Ball*, SexyNights::PhysObj*, bool)>>> callbacks::peg_hit_callbacks_;
-	std::unordered_map<callbacks::type, std::vector<callback_<void __cdecl(SexyNights::LogicMgr*, bool)>>> callbacks::begin_shot_callbacks_;
-	std::unordered_map<callbacks::type, std::vector<callback_<void __cdecl(SexyNights::LogicMgr*)>>> callbacks::begin_turn_2_callbacks_;
+	std::unordered_map<callbacks::type, std::vector<callback_<void __cdecl()>>> callbacks::begin_shot_callbacks_;
+	std::unordered_map<callbacks::type, std::vector<callback_<void __cdecl()>>> callbacks::begin_turn_2_callbacks_;
 	std::unordered_map<callbacks::type, std::vector<callback_<void __cdecl(SexyNights::MainMenu*)>>> callbacks::main_menu_update_callbacks_;
 	std::unordered_map<callbacks::type, std::vector<callback_<void __cdecl(SexyNights::Board*, std::string&)>>> callbacks::load_level_callbacks_;
 	std::unordered_map<callbacks::type, std::vector<callback_<void __cdecl(SexyNights::LevelScreen*, unsigned int)>>> callbacks::do_play_callbacks_;
@@ -92,17 +92,17 @@ namespace SexyNights
 		callbacks::peg_hit_callbacks_[callbacks::type::after_peg_hit].emplace_back(callback);
 	}
 
-	void callbacks::on_begin_shot(callback_<void __cdecl(SexyNights::LogicMgr*, bool)> callback)
+	void callbacks::on_begin_shot(callback_<void __cdecl()> callback)
 	{
 		callbacks::begin_shot_callbacks_[callbacks::type::begin_shot].emplace_back(callback);
 	}
 
-	void callbacks::after_begin_shot(callback_<void __cdecl(SexyNights::LogicMgr*, bool)> callback)
+	void callbacks::after_begin_shot(callback_<void __cdecl()> callback)
 	{
 		callbacks::begin_shot_callbacks_[callbacks::type::after_begin_shot].emplace_back(callback);
 	}
 
-	void callbacks::after_begin_turn_2(callback_<void __cdecl(SexyNights::LogicMgr*)> callback)
+	void callbacks::after_begin_turn_2(callback_<void __cdecl()> callback)
 	{
 		callbacks::begin_turn_2_callbacks_[callbacks::type::after_begin_turn_2].emplace_back(callback);
 	}
@@ -163,27 +163,27 @@ namespace SexyNights
 		}
 	}
 
-	void callbacks::run_begin_shot_callbacks(SexyNights::LogicMgr* logic_mgr, bool doGetReplayPoint)
+	void callbacks::run_begin_shot_callbacks()
 	{
 		for (const auto begin_shot_callback : callbacks::begin_shot_callbacks_[callbacks::type::begin_shot])
 		{
-			begin_shot_callback(logic_mgr, doGetReplayPoint);
+			begin_shot_callback();
 		}
 	}
 
-	void callbacks::run_after_begin_shot_callbacks(SexyNights::LogicMgr* logic_mgr, bool doGetReplayPoint)
+	void callbacks::run_after_begin_shot_callbacks()
 	{
 		for (const auto begin_shot_callback : callbacks::begin_shot_callbacks_[callbacks::type::after_begin_shot])
 		{
-			begin_shot_callback(logic_mgr, doGetReplayPoint);
+			begin_shot_callback();
 		}
 	}
 
-	void callbacks::run_after_begin_turn_2_callbacks(SexyNights::LogicMgr* logic_mgr)
+	void callbacks::run_after_begin_turn_2_callbacks()
 	{
 		for (const auto begin_turn_2_callback : callbacks::begin_turn_2_callbacks_[callbacks::type::after_begin_turn_2])
 		{
-			begin_turn_2_callback(logic_mgr);
+			begin_turn_2_callback();
 		}
 	}
 
