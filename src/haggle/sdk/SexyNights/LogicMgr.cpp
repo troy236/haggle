@@ -222,17 +222,24 @@ void SexyNights::LogicMgr::SetGunAngleDegrees(float newAngleDegrees)
 
 void SexyNights::LogicMgr::SetGunAngle(float newAngleDegrees)
 {
-	//TODO
 	if (!check_exists()) return;
-	//reinterpret_cast<void(__thiscall*)(LogicMgr*, float)>(0x0)(logic_mgr, newAngleDegrees);
+
+	static constexpr auto set_gun_angle_func = 0x00468d00;
+	__asm
+	{
+		push esi;
+		mov esi, SexyNights::LogicMgr::logic_mgr;
+		push newAngleDegrees;
+		call set_gun_angle_func; //Callee cleans the stack
+		pop esi;
+	}
 }
 
 float SexyNights::LogicMgr::GetGunAngleRadians(void)
 {
 	if (!check_exists()) return 0.0f;
 
-	//TODO. Not the same offset as Peggle Deluxe
-	float* gunAnglePtr = reinterpret_cast<float*>(logic_mgr + 0xE0);
+	float* gunAnglePtr = reinterpret_cast<float*>(logic_mgr + 0xEC);
 
 	if (gunAnglePtr == nullptr)
 	{
@@ -246,8 +253,7 @@ float SexyNights::LogicMgr::GetGunAngleDegrees(void)
 {
 	if (!check_exists()) return 0.0f;
 
-	//TODO. Not the same offset as Peggle Deluxe
-	float* gunAnglePtr = reinterpret_cast<float*>(logic_mgr + 0xE0);
+	float* gunAnglePtr = reinterpret_cast<float*>(logic_mgr + 0xEC);
 
 	if (gunAnglePtr == nullptr)
 	{
